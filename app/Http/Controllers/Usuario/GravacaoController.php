@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Veiculo;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\Gravacao;
 
-class VeiculoController extends Controller
+class GravacaoController extends Controller
 {
 
     public function index()
     {
-        $veiculos = Veiculo::all();   
-        return view('pages.veiculando.principal', ['veiculos'=>$veiculos]);
+        $gravacao = Gravacao::all();   
+        return view('pages.veiculando.principal', ['gravacao'=>$gravacao]);
        
     }   
 
-    public function cadastrandoVeiculos()
+    public function cadastrandoGravacao()
     {
         return view('pages.veiculando.cadastrandoVeiculos');
        
@@ -24,24 +24,18 @@ class VeiculoController extends Controller
 
     public function save(Request $request) {
         if(isset($request->id)){
-            $veiculos = Veiculo::where('id', '=', $request->id)->update([
-            "nome"=>$request->nome_veiculo,
-            "ano"=>$request->ano_veiculo,
-            "marca"=>$request->marca_veiculo,
-            "cilindrada"=>$request->cilindrada_veiculo,
-            "descrição"=>$request->descrição_veiculo,
-            "valor"=>$request->valor_veiculo,
+            $gravacao = Gravacao::where('id', '=', $request->id)->update([
+            "id_cliente"=>$request->nome_veiculo,
+            "id_atendente"=>$request->ano_veiculo,
+            
             ]);
             return redirect('/')->with('success', 'Veiculo editado com sucesso!');
         }else{
-            $veiculos = new veiculo();
-            $veiculos->nome = $request->nome_veiculo;
-            $veiculos->ano = $request->ano_veiculo;
-            $veiculos->marca = $request->marca_veiculo;
-            $veiculos->cilindrada = $request->cilindrada_veiculo;
-            $veiculos->descrição = $request->descrição_veiculo;
-            $veiculos->valor = $request->valor_veiculo;
-            if($veiculos->save()){
+            $gravacao = new Gravacao();
+            $gravacao->id_cliente = $request->nome_veiculo;
+            $gravacao->id_atendente = $request->ano_veiculo;
+           
+            if($gravacao->save()){
                 //entender os retornos
                 return redirect('/')->with('success', 'Veiculo cadastrado com sucesso!');
             }else{
@@ -53,14 +47,14 @@ class VeiculoController extends Controller
     
     public function edit(Request $request){     
         $id = $request->id;
-        $veiculos = Veiculo::where('id', '=', $id)->first();
-        return view('pages.Veiculando.cadastrandoVeiculos', ['veiculo' => $veiculos]);
+        $gravacao = Gravacao::where('id', '=', $id)->first();
+        return view('pages.Veiculando.cadastrandoVeiculos', ['veiculo' => $gravacao]);
 
     }
 
     public function delete(Request $request){
         $id = $request->id;
-        Veiculo::destroy($id);
+        Gravacao::destroy($id);
         return view('pages.veiculando.principal');       
     }
 

@@ -25,24 +25,20 @@ class AtendenteController extends Controller
 
     public function save(Request $request) {
         if(isset($request->id)){
-            $veiculos = Veiculo::where('id', '=', $request->id)->update([
+            $atendente = Atendente::where('id', '=', $request->id)->update([
             "nome"=>$request->nome_veiculo,
             "login"=>$request->ano_veiculo,
             "senha"=>$request->marca_veiculo,
-            "cilindrada"=>$request->cilindrada_veiculo,
-            "descrição"=>$request->descrição_veiculo,
-            "valor"=>$request->valor_veiculo,
+            
             ]);
             return redirect('/')->with('success', 'Veiculo editado com sucesso!');
         }else{
-            $veiculos = new veiculo();
-            $veiculos->nome = $request->nome_veiculo;
-            $veiculos->ano = $request->ano_veiculo;
-            $veiculos->marca = $request->marca_veiculo;
-            $veiculos->cilindrada = $request->cilindrada_veiculo;
-            $veiculos->descrição = $request->descrição_veiculo;
-            $veiculos->valor = $request->valor_veiculo;
-            if($veiculos->save()){
+            $atendente = new Atendente();
+            $atendente->nome = $request->nome_veiculo;
+            $atendente->login = $request->ano_veiculo;
+            $atendente->senha = $request->marca_veiculo;
+            
+            if($atendente->save()){
                 //entender os retornos
                 return redirect('/')->with('success', 'Veiculo cadastrado com sucesso!');
             }else{

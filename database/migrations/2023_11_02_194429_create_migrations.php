@@ -29,7 +29,7 @@ return new class extends Migration
                 $table->increments('id');
                 $table->string('nome');
                 $table->string('login');
-                $table->string('senha');
+                $table->string('senha'); 
                 $table->timestamps();
             });
         }

@@ -12,12 +12,12 @@ class ClienteController extends Controller
 
     public function index()
     {
-        $veiculos = Cliente::all();   
-        return view('pages.veiculando.principal', ['veiculos'=>$veiculos]);
+        $cliente = Cliente::all();   
+        return view('pages.veiculando.principal', ['veiculos'=> $cliente]);
        
     }   
 
-    public function cadastrandoVeiculos()
+    public function cadastrandoCliente()
     {
         return view('pages.veiculando.cadastrandoVeiculos');
        
@@ -26,7 +26,6 @@ class ClienteController extends Controller
     public function save(Request $request) {
         if(isset($request->id)){
             $cliente = Cliente::where('id', '=', $request->id)->update([
-            "id"=>$request->id,
             "nome"=>$request->nome,
             "login"=>$request->login,
             "senha"=>$request->senha,
@@ -38,11 +37,9 @@ class ClienteController extends Controller
         }else{
             $cliente = new cliente();
             $cliente->nome = $request->nome_veiculo;
-            $cliente->ano = $request->ano_veiculo;
-            $cliente->marca = $request->marca_veiculo;
-            $cliente->cilindrada = $request->cilindrada_veiculo;
-            $cliente->descrição = $request->descrição_veiculo;
-            $cliente->valor = $request->valor_veiculo;
+            $cliente->login = $request->ano_veiculo;
+            $cliente->senha = $request->marca_veiculo;
+           
             if($cliente->save()){
                 //entender os retornos
                 return redirect('/')->with('success', 'Cliente cadastrado com sucesso!');
@@ -56,8 +53,8 @@ class ClienteController extends Controller
     
     public function edit(Request $request){     
         $id = $request->id;
-        $veiculos = Cliente::where('id', '=', $id)->first();
-        return view('pages.Veiculando.cadastrandoVeiculos', ['veiculo' => $veiculos]);
+        $cliente = Cliente::where('id', '=', $id)->first();
+        return view('pages.Veiculando.cadastrandoVeiculos', ['veiculo' =>  $cliente]);
 
     }
 
