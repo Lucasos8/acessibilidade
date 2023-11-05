@@ -16,11 +16,14 @@
     </div>
     <div class="main">
         <form action="/login" method="POST">
-            <label for="user">Nome de usuário</label>
-            <input type="text" id="user" name="user" placeholder="Nome de usuario">
+            <label for="usuario">Nome de usuário</label>
+            <input type="text" id="user" name="usuario" placeholder="Nome de usuario">
+
             <label for="senha">Senha de acesso</label>
             <input type="password" id="senha" name="senha" placeholder="Senha de Acesso">
+            
             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+            
             <button type="submit">Iniciar Atendimento</button>
         </form>
     </div>
