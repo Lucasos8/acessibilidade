@@ -1,0 +1,7 @@
+*, *::before, *::after {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
