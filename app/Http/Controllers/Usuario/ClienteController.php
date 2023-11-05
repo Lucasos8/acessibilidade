@@ -1,25 +1,23 @@
 <?php
 
-namespace App\Http\Controllers\Cliente;
+namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 
-class ClienteController extends Controller
-{
+class ClienteController extends Controller {
 
-    public function index()
-    {
+    public function index() {
         $cliente = Cliente::all();   
         return view('pages.veiculando.principal', ['veiculos'=> $cliente]);
        
     }   
 
-    public function cadastrandoCliente()
-    {
-        return view('pages.veiculando.cadastrandoVeiculos');
+    public function login() {
+        var_dump($_POST);
+        // return redirect('/request-type');
        
     }   
 
