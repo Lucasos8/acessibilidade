@@ -1,0 +1,106 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+input, button {
+    padding: .5rem 1.5rem;
+    border-radius: 90em;
+}
+
+.aside {
+    background-color: #00995D;
+    color: white;
+    max-width: 400px;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.aside h1 {
+    margin: 0 0 1rem;
+    font-size: 2.5rem;
+}
+.aside button {
+    margin: auto auto 1rem;
+    color: inherit;
+    border: 3px solid currentColor;
+    background: transparent;
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.main {
+    height: 100%;
+    width: 100%;
+    background: url(/public/pattern.png);
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+}
+
+.main form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    gap: .5rem;
+    padding: 1rem;
+}
+.main form label {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1b1b1b;
+}
+.main form input[type=radio] {
+    appearance: none;
+    padding: 0.6rem;
+    margin: 1rem;
+    border-radius: 90em;
+    border: 2px solid currentColor;
+    position: relative;
+}
+.main form input[type=radio]:checked {
+    border-color: #00995D;
+}
+.main form input[type=radio]::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: currentColor;
+    color: #00995D;
+    border-radius: inherit;
+    margin: auto;
+    top: 0;
+    left: 0;
+    transform: scale(0);
+    transition: all ease-in 50ms;
+    outline: 1px solid #00995D;
+}
+.main form input[type=radio]:checked::before {
+    transform: scale(0.7);
+}
+.main form button {
+    margin: auto auto 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    background: #00995D;
+    color: white;
+    border: 0px;
+}
+
+.aside {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    background: #00995D;
+}
+
+.time-remaining {
+    text-align: center;
+    font-weight: 500;
+}
