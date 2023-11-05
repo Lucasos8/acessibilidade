@@ -1,0 +1,62 @@
+body {
+    background-color: #435E4E;
+    color: #fff;
+    overflow: hidden;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+}
+header .request-type {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.2rem;
+    opacity: .8;
+}
+header .attendant {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+video.webcamVideo {
+    position: fixed;
+    top: 0em;
+    right: 0;
+    width: 100%;
+    max-width: 300px;
+    background-color: #1b1b1b;
+    aspect-ratio: 16/9;
+    border-radius: .6rem;
+    margin: 1em;
+}
+
+video.remoteVideo {
+    width: 100vw;
+    height: 100vh;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #1b1b1b77;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer .hangup-call {
+    background: crimson;
+    color: white;
+    font-size: 1rem;
+    padding: .5rem 1.2rem;
+    border-radius: .5rem;
+    border: 0px;
+}
