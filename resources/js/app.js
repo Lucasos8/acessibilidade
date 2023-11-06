@@ -92,8 +92,23 @@ const createOffer = async () => {
   return callDoc.id
 };
 
+function getParameterByName(name) {
+  var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+  return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
 
-start()
-createOffer().then(offerId => {
-  console.log(offerId)
-})
+window.onload = () => {
+  start()
+  createOffer().then(offerId => {
+    var laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    axios.post('/save-room', {
+      user_id: getParameterByName("user_id"),
+      room_id: offerId
+    }, { 
+      headers: {
+        'X-CSRF-TOKEN': laravelToken, 
+        'Content-Type': 'multipart/form-data'
+      } 
+    })
+  })
+}

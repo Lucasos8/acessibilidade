@@ -9,10 +9,12 @@
 <body>
     <div class="main">
         <h1>De qual atendimento você precisa?</h1>
-        <form action="">
-            <label> <input type="radio" name="atendimento"> Emergência </label>
-            <label> <input type="radio" name="atendimento"> Atendimento Imediato </label>
-            <label> <input type="radio" name="atendimento"> Ajuda </label>
+        <form action="/request-live-session" method="POST">
+            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+            <input type="hidden" name="user_id" id="user_id" value="{{ session('id') }}">
+            <label> <input type="radio" name="tipo_atendimento" value="Emergência"> Emergência </label>
+            <label> <input type="radio" name="tipo_atendimento" value="Atendimento Imediato"> Atendimento Imediato </label>
+            <label> <input type="radio" name="tipo_atendimento" value="Ajuda"> Ajuda </label>
             <button type="submit">Falar com um atendente</button>
             <small class="time-remaining">Tempo médio de espera 1:00 min</small>
         </form>

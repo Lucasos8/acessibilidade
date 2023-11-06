@@ -22,3 +22,5 @@ Route::view('/live-chat', '/live-chat');
 Route::view('/request-type', '/request-type');
 
 Route::post("/login", "App\Http\Controllers\Usuario\ClienteController@login")->name("user.login");
+Route::post("/save-room", "App\Http\Controllers\Usuario\ClienteController@saveRoomId")->name("user.saveRoom");
+Route::post("/request-live-session", "App\Http\Controllers\VideoChat\VideoChatController@createRequest")->name("videoChat.createRoom");
