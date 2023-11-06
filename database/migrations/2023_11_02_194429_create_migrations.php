@@ -18,9 +18,18 @@ return new class extends Migration
                 $table->string('nome');
                 $table->string('login');
                 $table->string('senha');
+                $table->string('tipo_atendimento')->nullable();
+                $table->string('id_sala')->nullable();
                 $table->timestamps();
                 
             });
+            DB::table('cliente')->insert(
+                array(
+                    'login' => 'teste@local.com',
+                    'nome' => 'teste',
+                    'senha' => '123'
+                )
+            );
         }
 
         
@@ -53,8 +62,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::drop('gravacao');
         Schema::drop('cliente');
         Schema::drop('atendente');
-        Schema::drop('gravacao');
     }
 };
