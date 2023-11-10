@@ -2,7 +2,7 @@
 
 <br><p align="center">
   <a href="title">
-    <img src="background/background.png" width="600" alt="image">
+    <img src="background/background.jpg" width="600" alt="image">
   </a>
 </p>
 
