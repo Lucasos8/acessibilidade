@@ -17,7 +17,7 @@
 
 <h2 id=tecnologias>💻 Tecnologias</h2>
 
-As tecnologias que foram utilizadas neste projeto são as seguintes: 
+- As tecnologias que foram utilizadas neste projeto são as seguintes: 
 
 - <a href="https://www.figma.com/file/A3786rgh4dnIms0ZBGMN8B/Untitled?type=design&node-id=151%3A15&mode=design&t=U48Vi431cARgTL3x-1">`FIGMA`</a>
 - <a href="https://developer.mozilla.org/pt-BR/docs/Web/HTML">`HTML`</a>
