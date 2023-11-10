@@ -36,7 +36,7 @@
 - <a href="https://github.com/ocai0" target="_blank">Caio Fernandes</a> 👨‍🎓
 - <a href="https://github.com/Lucasos8" target="_blank">Lucas Souza</a> 👨‍🎓
 - <a href="" target="_blank">Phillipe Rodrigues</a> 👨‍🎓
-- <a href="www.github.com/renzzorocha" target="_blank">Renzzo Rocha</a> 👨‍🎓
+- <a href="https://github.com/renzzorocha" target="_blank">Renzzo Rocha</a> 👨‍🎓
 
 
 <h2 id=licenca>🆓 Licença</h2>
