@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Veiculo;
+namespace App\Http\Controllers\Usuario;
 
 use App\Http\Controllers\Controller;
 use App\Models\Atendente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Usuario;
 
 class AtendenteController extends Controller {
@@ -19,7 +20,7 @@ class AtendenteController extends Controller {
         $users = DB::select('select * from atendente where (nome = ? OR login = ?) AND senha = ?', [$usuario, $usuario, $senha]);
         $numLines = count($users);
         if($numLines == 0) return redirect('/atendimento/login');
-        return redirect('atendente/salas-abertas')->with(["id" => $users[0]->id]);
+        return view('atendenteSalasAbertas')->with(["id" => $users[0]->id]);
        
     }
 
