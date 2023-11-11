@@ -7,58 +7,21 @@ use App\Models\Atendente;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 
-class AtendenteController extends Controller
-{
+class AtendenteController extends Controller {
 
-    public function index()
-    {
-        $atendente = Atendente::all();   
-        return view('pages.veiculando.principal', ['atendente'=>$atendente]);
-       
-    }   
-
-    public function cadastrandoAtendente()
-    {
-        return view('pages.veiculando.cadastrandoVeiculos');
-       
-    }   
-
-    public function save(Request $request) {
-        if(isset($request->id)){
-            $atendente = Atendente::where('id', '=', $request->id)->update([
-            "nome"=>$request->nome_veiculo,
-            "login"=>$request->ano_veiculo,
-            "senha"=>$request->marca_veiculo,
-            
-            ]);
-            return redirect('/')->with('success', 'Veiculo editado com sucesso!');
-        }else{
-            $atendente = new Atendente();
-            $atendente->nome = $request->nome_veiculo;
-            $atendente->login = $request->ano_veiculo;
-            $atendente->senha = $request->marca_veiculo;
-            
-            if($atendente->save()){
-                //entender os retornos
-                return redirect('/')->with('success', 'Veiculo cadastrado com sucesso!');
-            }else{
-                return redirect('/')->withErrors('Ocorreu um erro ao salvar o veiculo!');
-            }
+    public function login() {
+        $usuario = $_POST["usuario"];
+        $senha = $_POST["senha"];
+        if(!isset($usuario) || !isset($senha)) {
+            return redirect('atendente/login');
         }
-        //return view('pages.veiculando.principal');
-    }
-    
-    public function edit(Request $request){     
-        $id = $request->id;
-        $atendente = Atendente::where('id', '=', $id)->first();
-        return view('pages.Veiculando.cadastrandoVeiculos', ['atendente' => $atendente]);
 
+        $users = DB::select('select * from atendente where (nome = ? OR login = ?) AND senha = ?', [$usuario, $usuario, $senha]);
+        $numLines = count($users);
+        if($numLines == 0) return redirect('/atendimento/login');
+        return redirect('atendente/salas-abertas')->with(["id" => $users[0]->id]);
+       
     }
 
-    public function delete(Request $request){
-        $id = $request->id;
-        Atendente::destroy($id);
-        return view('pages.veiculando.principal');       
-    }
 
 }
