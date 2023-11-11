@@ -8,7 +8,8 @@
 
 <h2 id=descricao>📜 Descrição</h2>
 
- Projeto de atendimento/acessibilidade virtual para a terceira idade;
+ Projeto de atendimento/acessibilidade virtual para a terceira idade;<br>
+ <br>
  Este projeto foi feito para atender uma solicitação de um grupo de estudantes da Universidade UNA para os graduandos de T.I da mesma universidade.
 
 <h2 id=video> 🎥 Vídeo Do Projeto </h2>
