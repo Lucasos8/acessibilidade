@@ -24,10 +24,9 @@ let localStream = null;
 let remoteStream = null;
 
 const hangupButton = document.getElementById('hangupButton');
-const callButton = document.getElementById('hangupButton');
 
-const start = async () => {
-  localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+async function start() {
+  localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
   remoteStream = new MediaStream();
 
   // Push tracks from local stream to peer connection
@@ -46,9 +45,44 @@ const start = async () => {
   remoteVideo.srcObject = remoteStream;
   
 };
+async function answer(room) {
+  const callId = room;
+  const callDoc = firestore.collection('calls').doc(callId);
+  const answerCandidates = callDoc.collection('answerCandidates');
+  const offerCandidates = callDoc.collection('offerCandidates');
+
+  pc.onicecandidate = (event) => {
+    event.candidate && answerCandidates.add(event.candidate.toJSON());
+  };
+
+  const callData = (await callDoc.get()).data();
+
+  const offerDescription = callData.offer;
+  await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
+
+  const answerDescription = await pc.createAnswer();
+  await pc.setLocalDescription(answerDescription);
+
+  const answer = {
+    type: answerDescription.type,
+    sdp: answerDescription.sdp,
+  };
+
+  await callDoc.update({ answer });
+
+  offerCandidates.onSnapshot((snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      console.log(change);
+      if (change.type === 'added') {
+        let data = change.doc.data();
+        pc.addIceCandidate(new RTCIceCandidate(data));
+      }
+    });
+  });
+}
 
 // 2. Create an offer
-const createOffer = async () => {
+async function createOffer() {
   // Reference Firestore collections for signaling
   const callDoc = firestore.collection('calls').doc();
   const offerCandidates = callDoc.collection('offerCandidates');
@@ -97,18 +131,37 @@ function getParameterByName(name) {
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
-window.onload = () => {
+window.onload = function() {
   start()
-  createOffer().then(offerId => {
-    var laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    axios.post('/save-room', {
-      user_id: getParameterByName("user_id"),
-      room_id: offerId
-    }, { 
-      headers: {
-        'X-CSRF-TOKEN': laravelToken, 
-        'Content-Type': 'multipart/form-data'
-      } 
+  let urlPath = location.pathname.split("/").filter(a => a !== "")
+  if(urlPath.length === 3) {
+    answer(urlPath[2])
+  }
+  else {
+    createOffer().then(offerId => {
+      var laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+      axios.post('/save-room', {
+        user_id: getParameterByName("user_id"),
+        room_id: offerId
+      }, 
+      { 
+        headers: {
+          'X-CSRF-TOKEN': laravelToken, 
+          'Content-Type': 'multipart/form-data'
+        } 
+      })
     })
-  })
+  }
 }
+window.addEventListener("beforeunload", () => {
+  var laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  axios.post("/remove-room", {
+    user_id: getParameterByName("user_id"),
+  }, 
+  {
+    headers: {
+      'X-CSRF-TOKEN': laravelToken, 
+      'Content-Type': 'multipart/form-data'
+    } 
+  })
+})
