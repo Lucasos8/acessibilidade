@@ -24,6 +24,7 @@ Route::view('/request-type', '/request-type');
 Route::post("/login", "App\Http\Controllers\Usuario\ClienteController@login")->name("user.login");
 Route::post("/save-room", "App\Http\Controllers\Usuario\ClienteController@saveRoomId")->name("user.saveRoom");
 Route::post("/request-live-session", "App\Http\Controllers\VideoChat\VideoChatController@createRequest")->name("videoChat.createRoom");
+Route::get("/get-active-sessions", "App\Http\Controllers\VideoChat\VideoChatController@getActiveSessions")->name("user.getActiveSessions");
 
 Route::view('/atendente', '/loginAtendente');
 Route::post("atendente/login", "App\Http\Controllers\Usuario\AtendenteController@login")->name("attendant.login");

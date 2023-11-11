@@ -16,8 +16,13 @@ class VideoChatController extends Controller {
         return redirect('live-chat?user_id=' . $userId);
     }
 
-    function saveRoomId() {
-
+    function getActiveSessions() {
+        $users = Cliente::select("id_sala", "nome", "tipo_atendimento")->where('id_sala', "!=", NULL)->get();
+        $ids = [];
+        foreach($users as $user) {
+            array_push($ids, (["id_sala" => $user->id_sala, "nome" => $user->nome, "tipo_atendimento" => $user->tipo_atendimento]));
+        }
+        return $ids;
     }
 
 }
