@@ -1,0 +1,29 @@
+table, th, td {
+    width: 1000px ;
+    margin: 0 auto;
+    border: 1px solid rgba(45, 240, 6, 0.61);
+    background-color: rgba(174, 241, 151, 0.925);
+    color: black;
+    box-shadow: 2px 2px 5px #888888;
+    border-radius: 5px;
+      }
+ 
+  body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color :rgb(224, 245, 218)
+}
+table {
+    page-break-inside: auto;
+    width: 100%;
+  }
+  
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto
+  }
+  
+  thead {
+    display: table-header-group
+  }
