@@ -25,7 +25,7 @@ let remoteStream = null;
 
 const hangupButton = document.getElementById('hangupButton');
 
-async function start() {
+const start = async () => {
   localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
   remoteStream = new MediaStream();
 
@@ -45,7 +45,8 @@ async function start() {
   remoteVideo.srcObject = remoteStream;
   
 };
-async function answer(room) {
+window.start = start
+const answer = async (room)=>  {
   const callId = room;
   const callDoc = firestore.collection('calls').doc(callId);
   const answerCandidates = callDoc.collection('answerCandidates');
@@ -80,9 +81,10 @@ async function answer(room) {
     });
   });
 }
+window.answer = answer
 
 // 2. Create an offer
-async function createOffer() {
+const createOffer = async  ()  => {
   // Reference Firestore collections for signaling
   const callDoc = firestore.collection('calls').doc();
   const offerCandidates = callDoc.collection('offerCandidates');
@@ -122,7 +124,7 @@ async function createOffer() {
       }
     });
   });
-
+  console.log(callDoc.id)
   return callDoc.id
 };
 
@@ -131,8 +133,8 @@ function getParameterByName(name) {
   return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }
 
-window.onload = function() {
-  start()
+window.onload = async () => {
+  await start()
   let urlPath = location.pathname.split("/").filter(a => a !== "")
   if(urlPath.length === 3) {
     answer(urlPath[2])
