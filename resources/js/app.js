@@ -9,6 +9,20 @@ if (!firebase.apps.length) {
 }
 const firestore = firebase.firestore();
 
+const endCall = () => {
+  var laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  axios.post("/remove-room", {
+    user_id: getParameterByName("user_id"),
+  }, 
+  {
+    headers: {
+      'X-CSRF-TOKEN': laravelToken, 
+      'Content-Type': 'multipart/form-data'
+    } 
+  }).then(data => {
+    history.back()
+  })
+}
 const servers = {
   iceServers: [
     {
@@ -110,6 +124,7 @@ const createOffer = async  ()  => {
   callDoc.onSnapshot((snapshot) => {
     const data = snapshot.data();
     if (!pc.currentRemoteDescription && data?.answer) {
+      document.querySelector('.attendant').textContent = `Atendente Online`
       const answerDescription = new RTCSessionDescription(data.answer);
       pc.setRemoteDescription(answerDescription);
     }
@@ -155,15 +170,7 @@ window.onload = async () => {
     })
   }
 }
-window.addEventListener("beforeunload", () => {
-  var laravelToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-  axios.post("/remove-room", {
-    user_id: getParameterByName("user_id"),
-  }, 
-  {
-    headers: {
-      'X-CSRF-TOKEN': laravelToken, 
-      'Content-Type': 'multipart/form-data'
-    } 
-  })
-})
+window.addEventListener("beforeunload", endCall)
+
+
+hangupButton.addEventListener('click', endCall)

@@ -13,7 +13,7 @@ class VideoChatController extends Controller {
         $userId = $_POST["user_id"];
         $tipoRequisicao = $_POST["tipo_atendimento"];
         Cliente::where('id', $userId)->update(['tipo_atendimento' => $tipoRequisicao]);
-        return redirect('live-chat?user_id=' . $userId);
+        return redirect('live-chat?user_id=' . $userId)->with(['tipo_atendimento' => $tipoRequisicao]);
     }
 
     function getActiveSessions() {

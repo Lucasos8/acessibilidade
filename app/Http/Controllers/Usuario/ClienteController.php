@@ -9,13 +9,6 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Usuario;
 
 class ClienteController extends Controller {
-
-    public function index() {
-        $cliente = Cliente::all();   
-        return view('pages.veiculando.principal', ['veiculos'=> $cliente]);
-       
-    }   
-
     public function login() {
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
@@ -30,14 +23,11 @@ class ClienteController extends Controller {
        
     }
 
-
-
     public function saveRoomId() {
         $userId = $_POST["user_id"];
         $roomId = $_POST["room_id"];
         Cliente::where('id', $userId)->update(['id_sala' => $roomId]);
     }
-
 
     public function removeRoom() {
         $userId = $_POST["user_id"];

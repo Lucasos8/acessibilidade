@@ -25,13 +25,13 @@ return new class extends Migration
             });
             DB::table('cliente')->insert(
                 array(
-                    'login' => 'teste@local.com',
-                    'nome' => 'teste',
-                    'senha' => '123'
+                    'login' => 'claudio@local.com',
+                    'nome' => 'Claudio Moura',
+                    'senha' => 'claudio'
                 )
             );
         }
-
+        
         
         if (!Schema::hasTable('atendente')) {
             Schema::create('atendente', function (Blueprint $table) {
@@ -41,6 +41,13 @@ return new class extends Migration
                 $table->string('senha'); 
                 $table->timestamps();
             });
+            DB::table('atendente')->insert(
+                array(
+                    'login' => 'ana.beatriz@local.com',
+                    'nome' => 'Ana Beatriz',
+                    'senha' => 'anabeatriz'
+                )
+            );
         }
 
       

@@ -10,14 +10,14 @@
 <body>
   
     <header>
-        <h2 class="request-type">Atendimento ao Cliente</h2>
-        <p class="attendant">Atendente Cláudia Dias</p>
+        <h2 class="request-type">{{session('tipo_atendimento')}}</h2>
+        <p class="attendant">Buscando Atendente</p>
     </header>
     <video id="webcamVideo" class="webcamVideo" autoplay playsinline></video>
     <video id="remoteVideo" class="remoteVideo" autoplay playsinline></video>
 
     <footer>
-        <button class="hangup-call" id="hangupButton" disabled>Encerrar Chamada</button>
+        <button class="hangup-call" id="hangupButton">Encerrar Chamada</button>
     </footer>
 
     <input type="hidden" name="userId" id="userId" value="{{ session('id') }}">
