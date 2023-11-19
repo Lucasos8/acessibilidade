@@ -6,7 +6,11 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                'resources/css/live-chat.css',
                 'resources/css/login.css',
+                'resources/css/request-type.css',
+                'resources/css/salasAbertas.css',
+                
                 'resources/js/app.js',
             ],
             refresh: true,

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salas Abertas</title>
-    @vite(['resources/css/app.css', 'resources/css/salasAbertas.css'])  
+    <link rel="stylesheet" href="/build/assets/app-0b75ff92.css">
+    <link rel="stylesheet" href="/build/assets/salasAbertas-284128e1.css">
 </head>
 <body>
     <main>

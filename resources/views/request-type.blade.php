@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite(['resources/css/app.css', 'resources/css/request-type.css'])
-    <title>Tipo de Atendimento</title>
+    <link rel="stylesheet" href="/build/assets/app-0b75ff92.css">
+    <link rel="stylesheet" href="/build/assets/request-type-4806c304.css">
+    <title>Tipo de Atendimento</title>  
 </head>
 <body>
     <div class="main">
